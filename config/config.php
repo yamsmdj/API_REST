@@ -2,7 +2,7 @@
 
 class Database{
     private $host = "localhost";
-    private $dbname = "API_REST";
+    private $dbname = "MEDOC_API_REST";
     private $dbuser = "root";
     private $dbpass = '';
     public $connexion ;
