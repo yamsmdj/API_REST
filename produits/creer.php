@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instancie la BDD
     $database = new Database();
     $db = $database->getPDOLink();
-    
+
     // Instancie les produits
     $medicaments = new Produits($db);
 

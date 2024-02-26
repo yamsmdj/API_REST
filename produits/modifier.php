@@ -12,11 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     // Instancie la BDD
     $database = new Database();
     $db = $database->getPDOLink();
-    
+
     // Instancie les produits
     $medicaments = new Produits($db);
 
-    // recupere les données
     $donnees = json_decode(file_get_contents("php://input"));
     if (!empty($donnees->id) && !empty($donnees->nom) && !empty($donnees->img) && !empty($donnees->prix) && !empty($donnees->pays_id)) {
         $medicaments->id = $donnees->id;
@@ -24,15 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         $medicaments->img = $donnees->img;
         $medicaments->prix = $donnees->prix;
         $medicaments->pays_id = $donnees->pays_id;
-            if ($medicaments->modifier()) {
-                http_response_code(200);
-                echo json_encode(["message" => "modification reussi"]);
-            }else{
-                http_response_code(503);
-                echo json_encode(["message" => "modification echouer"]);
-            }
-    }else{
-    http_response_code(405);
-    echo json_encode(["message" => "Error Method Authorized"]);
+        if ($medicaments->modifier()) {
+            http_response_code(200);
+            echo json_encode(["message" => "modification reussi"]);
+        } else {
+            http_response_code(503);
+            echo json_encode(["message" => "modification echouer"]);
+        }
+    } else {
+        http_response_code(405);
+        echo json_encode(["message" => "Error Method Authorized"]);
     }
 }
